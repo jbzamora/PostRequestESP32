@@ -39,10 +39,9 @@ void loop() {
     String json = "{\"timezone\":\"" + timezone + "\"}";
 //    Serial.println(json);
 
-    WiFiClient client;
     HTTPClient http;
 
-    http.begin(client, "https://binaryec.com/timezone/index.php");  //Specify destination for HTTP request
+    http.begin("https://binaryec.com/timezone/index.php");  //Specify destination for HTTP request
     http.addHeader("Content-Type", "application/json");        //Specify content-type header
 
     int httpResponseCode = http.POST(json);   //Send actual POST request
