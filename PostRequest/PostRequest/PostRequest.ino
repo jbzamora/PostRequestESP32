@@ -1,13 +1,22 @@
-#if 0     // 1 -> ESP8266 | 0 -> ESP32
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
-#else
+/*****************************************************************************
+  
+  This is an example for doing a simple Post Request in JSON format with
+  a microcontroller [WiFi] ESP32 of Espressif Systems.
+
+  In this example we send a region or timezone similar to 'America/Guayaquil' 
+  for received a string on JSON format with the local time and other dates
+  provided for a micro service of https://binaryec.com  
+  
+  Developer: Jhonny Zamora A.
+  https://github.com/jbzamora
+  Email: jzamora@binaryec.com
+  
+*****************************************************************************/
 #include <WiFi.h>
 #include <HTTPClient.h>
-#endif
 
-const char* ssid = "SPD";
-const char* password = "SOLOPARADIOSES";
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASS";
 
 String timezone = "America/Guayaquil";
 
@@ -37,12 +46,11 @@ void setup() {
 
 void loop() {    
     String json = "{\"timezone\":\"" + timezone + "\"}";
-//    Serial.println(json);
 
     HTTPClient http;
 
-    http.begin("https://binaryec.com/timezone/index.php");  //Specify destination for HTTP request
-    http.addHeader("Content-Type", "application/json");        //Specify content-type header
+    http.begin("https://binaryec.com/timezone/index.php");      //Specify destination for HTTP request
+    http.addHeader("Content-Type", "application/json");         //Specify content-type header
 
     int httpResponseCode = http.POST(json);   //Send actual POST request
 
