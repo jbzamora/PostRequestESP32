@@ -9,6 +9,8 @@
 const char* ssid = "SPD";
 const char* password = "SOLOPARADIOSES";
 
+String timezone = "America/Guayaquil";
+
 void setup() {
   Serial.begin(115200);
 
@@ -33,22 +35,21 @@ void setup() {
 }
 
 void loop() {    
-    String json = "{\"varGuid\":\"" + nameSensor + "\",\"Estado\":" + code + "}";
-    Serial.println(json);
+    String json = "{\"timezone\":\"" + timezone + "\"}";
+//    Serial.println(json);
 
     WiFiClient client;
     HTTPClient http;
 
-    http.begin(client, "http://192.168.100.11/VkeyDev/rest/PrcSensorService");  //Specify destination for HTTP request
+    http.begin(client, "https://binaryec.com/timezone/index.php");  //Specify destination for HTTP request
     http.addHeader("Content-Type", "application/json");        //Specify content-type header
 
     int httpResponseCode = http.POST(json);   //Send actual POST request
 
     if (httpResponseCode > 0) {
       String response = http.getString();   //Get the response to the request
-      Serial.println(httpResponseCode);     //Print return code
-      Serial.println(response);             //Print request answer
-      code = "";
+      Serial.println("Code: "); Serial.print(httpResponseCode);     //Print return code
+      Serial.println("Server Response: "); Serial.print(response);  //Print request answer
     }
     else {
       Serial.print("Error on sending POST: ");
