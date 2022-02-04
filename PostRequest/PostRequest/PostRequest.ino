@@ -9,16 +9,17 @@
 const char* ssid = "SPD";
 const char* password = "SOLOPARADIOSES";
 
-
 void setup() {
   Serial.begin(115200);
 
   WiFi.begin(ssid, password);
 
+  Serial.println();
+  Serial.print("Connecting to WiFi");
   int cont = 0;
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    Serial.println("Connecting to WiFi...");
+    Serial.print(". ");
     cont++;
     if (cont >= 10) {
       ESP.restart();
