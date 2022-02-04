@@ -28,6 +28,7 @@ void setup() {
     }
   }
 
+  Serial.println();
   Serial.print("Conectado a: ");
   Serial.print(ssid);
   Serial.print(" Con IP: ");
@@ -48,8 +49,8 @@ void loop() {
 
     if (httpResponseCode > 0) {
       String response = http.getString();   //Get the response to the request
-      Serial.println("Code: "); Serial.print(httpResponseCode);     //Print return code
-      Serial.println("Server Response: "); Serial.print(response);  //Print request answer
+      Serial.print("Code: "); Serial.println(httpResponseCode);     //Print return code
+      Serial.print("Server Response: "); Serial.println(response);  //Print request answer
     }
     else {
       Serial.print("Error on sending POST: ");
